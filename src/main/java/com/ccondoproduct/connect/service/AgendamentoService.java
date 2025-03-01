@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AgendamentoService {
@@ -46,5 +48,10 @@ public class AgendamentoService {
 
     public void deletar(Long id) {
         agendamentoRepository.deleteById(id);
+    }
+
+    public Map<String, Long> obterEstatisticas() {
+        return agendamentoRepository.findAll().stream()
+                .collect(Collectors.groupingBy(a -> a.getArea().name(), Collectors.counting()));
     }
 }
