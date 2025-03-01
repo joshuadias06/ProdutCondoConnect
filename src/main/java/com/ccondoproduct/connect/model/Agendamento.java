@@ -17,8 +17,9 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String area;
+    private EspacoCondominio area;
 
     @Column(nullable = false)
     private String solicitante;
