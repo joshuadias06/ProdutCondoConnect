@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -29,6 +30,10 @@ public class AgendamentoController {
         return ResponseEntity.ok(EspacoCondominio.values());
     }
 
+    @GetMapping("/estatisticas")
+    public ResponseEntity<Map<String, Long>> obterEstatisticas() {
+        return ResponseEntity.ok(agendamentoService.obterEstatisticas());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Agendamento> buscarPorId(@PathVariable Long id) {
