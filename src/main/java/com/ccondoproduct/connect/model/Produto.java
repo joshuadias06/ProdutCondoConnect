@@ -1,16 +1,9 @@
 package com.ccondoproduct.connect.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "produtos")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Produto {
 
     @Id
@@ -30,7 +23,54 @@ public class Produto {
     private String proprietario;
 
     @Column(nullable = false)
-    private int telefone;
+    private String telefone;
 
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 }
