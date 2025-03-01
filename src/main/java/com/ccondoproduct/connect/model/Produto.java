@@ -24,8 +24,13 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false)
-    private BigDecimal preco;
+    private String img;
 
     @Column(nullable = false)
-    private int quantidade;
+    private String proprietario;
+
+    @Column(nullable = false)
+    private int telefone;
+
+
 }
