@@ -1,6 +1,7 @@
 package com.ccondoproduct.connect.controller;
 
 import com.ccondoproduct.connect.model.Agendamento;
+import com.ccondoproduct.connect.model.EspacoCondominio;
 import com.ccondoproduct.connect.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +24,12 @@ public class AgendamentoController {
         return agendamentoService.listarTodos();
     }
 
+    @GetMapping("/espacos-disponiveis")
+    public ResponseEntity<EspacoCondominio[]> listarEspacosDisponiveis() {
+        return ResponseEntity.ok(EspacoCondominio.values());
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Agendamento> buscarPorId(@PathVariable Long id) {
         Optional<Agendamento> agendamento = agendamentoService.buscarPorId(id);
@@ -37,9 +44,13 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public Agendamento criar(@RequestBody Agendamento agendamento) {
-        return agendamentoService.criar(agendamento);
+    public ResponseEntity<?> criar(@RequestBody Agendamento agendamento) {
+        if (agendamento.getArea() == null) {
+            return ResponseEntity.badRequest().body("Espaço inválido. Escolha um dos espaços disponíveis.");
+        }
+        return ResponseEntity.ok(agendamentoService.criar(agendamento));
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Agendamento> atualizar(@PathVariable Long id, @RequestBody Agendamento agendamento) {
