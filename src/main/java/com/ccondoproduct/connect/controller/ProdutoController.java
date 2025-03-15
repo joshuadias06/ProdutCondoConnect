@@ -17,6 +17,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
+
     @GetMapping
     public List<Produto> listarTodos() {
         return produtoService.listarTodos();
