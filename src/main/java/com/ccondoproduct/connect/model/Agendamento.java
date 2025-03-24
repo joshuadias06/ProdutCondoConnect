@@ -1,6 +1,7 @@
 package com.ccondoproduct.connect.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,10 +23,7 @@ public class Agendamento {
     private String telefone;
 
     @Column(nullable = false)
-    private LocalDateTime dataHora;
-
-    @Column(nullable = false)
-    private boolean confirmado = false;
+    private LocalDate data;
 
     // Getters e Setters
     public Long getId() {
@@ -60,19 +58,12 @@ public class Agendamento {
         this.telefone = telefone;
     }
 
-    public LocalDateTime getDataHora() {
-        return dataHora;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
-    public boolean isConfirmado() {
-        return confirmado;
-    }
-
-    public void setConfirmado(boolean confirmado) {
-        this.confirmado = confirmado;
-    }
 }

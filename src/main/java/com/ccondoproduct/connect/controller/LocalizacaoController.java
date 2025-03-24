@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/localizacoes") // Agora a URL será /localizacoes
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class LocalizacaoController {
 
     @Autowired

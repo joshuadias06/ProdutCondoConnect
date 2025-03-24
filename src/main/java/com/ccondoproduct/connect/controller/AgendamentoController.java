@@ -8,13 +8,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/agendamentos")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class AgendamentoController {
 
     @Autowired
@@ -23,11 +24,6 @@ public class AgendamentoController {
     @GetMapping
     public List<Agendamento> listarTodos() {
         return agendamentoService.listarTodos();
-    }
-
-    @GetMapping("/espacos-disponiveis")
-    public ResponseEntity<EspacoCondominio[]> listarEspacosDisponiveis() {
-        return ResponseEntity.ok(EspacoCondominio.values());
     }
 
     @GetMapping("/estatisticas")
@@ -41,11 +37,9 @@ public class AgendamentoController {
         return agendamento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/periodo")
-    public List<Agendamento> listarPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
-        return agendamentoService.listarPorPeriodo(inicio, fim);
+    @GetMapping("/dia")
+    public List<Agendamento> listarPorDia(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
+        return agendamentoService.listarPorDia(data);
     }
 
     @PostMapping
@@ -57,18 +51,4 @@ public class AgendamentoController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Agendamento> atualizar(@PathVariable Long id, @RequestBody Agendamento agendamento) {
-        try {
-            return ResponseEntity.ok(agendamentoService.atualizar(id, agendamento));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        agendamentoService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
 }
