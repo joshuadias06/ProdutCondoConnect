@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
     List<Agendamento> findByDataBetween(LocalDate inicio, LocalDate fim);
+    List<Agendamento> findByData(LocalDate data);
 }

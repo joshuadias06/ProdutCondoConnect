@@ -64,9 +64,7 @@ public class AgendamentoService {
     }
 
     public List<Agendamento> listarPorDia(LocalDate data) {
-        return agendamentoRepository.findAll().stream()
-                .filter(agendamento -> agendamento.getData().equals(data))
-                .collect(Collectors.toList());
+        return agendamentoRepository.findByData(data);  // Alteração para utilizar o método correto
     }
 
 }
